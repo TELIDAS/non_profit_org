@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'news_npo',
     'rest_framework',
     'rest_framework.authtoken',
+    'publication',
+    'law',
 
 ]
 
