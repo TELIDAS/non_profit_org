@@ -25,7 +25,8 @@ class NewsAPIView(APIView, PageNumberPagination):
                                          view=self)
 
         return self.get_paginated_response(self.serializer_class(results,
-                                                                 many=True).data)
+                                                                 many=True,
+                                           context={'request': request}).data)
 
     def post(self, request):
         title = request.data.get('title')

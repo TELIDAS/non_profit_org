@@ -1,14 +1,33 @@
 
 from rest_framework import serializers
-from .models import User, FavoriteNews
+from .models import User, FavoriteNews, NewsImage
 from news_npo.models import News
 
 
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewsImage
+        fields = '__all__'
+
 class NewsSerializer(serializers.ModelSerializer):
+    images = ImageSerializer(many=True)
+    is_favourite = serializers.SerializerMethodField()
 
     class Meta:
         model = News
-        fields = '__all__'
+        fields = 'id title description image created_date link images is_favourite'.split()
+
+    def get_is_favourite(self, obj):
+        request = self.context['request']
+        if request.user.is_anonymous:
+            return False
+        else:
+            favorite = FavoriteNews.objects.filter(news=obj, user=request.user)
+            if len(favorite) > 0:
+                return True
+            else:
+                return False
+
 
 class UserSerializer(serializers.ModelSerializer):
 
