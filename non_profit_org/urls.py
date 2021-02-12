@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('news_npo.urls')),
     path('', include('publication.urls')),
     path('', include('law.urls')),
+    path('', include('consultation.urls')),
 ]
 from django.conf import settings
 from django.conf.urls.static import static
