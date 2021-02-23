@@ -44,14 +44,13 @@ class NewsAPIViewDetail(APIView):
 
     def get(self, request, id):
         news = News.objects.get(id=id)
-        return Response(data=self.serializer_class(news).data)
+        serializer = self.serializer_class(news)
+        return Response(data=serializer.data)
 
     def delete(self, request, *args, **kwargs):
         news = News.objects.get(id=id)
         news.delete()
-        news = News.objects.all()
-        return Response(data=self.serializer_class(news).data,
-                        status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     def put(self, request, id):
         news = News.objects.get(id=id)
@@ -142,4 +141,4 @@ class FavoriteCreateListDestroyAPIView(APIView):
         favorites = FavoriteNews.objects.filter(news_id=news_id,
                                                 user=request.user)
         favorites.delete()
-        return Response(status=status.HTTP_200_OK)
+        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -25,8 +25,7 @@ class NewsSerializer(serializers.ModelSerializer):
             favorite = FavoriteNews.objects.filter(news=obj, user=request.user)
             if len(favorite) > 0:
                 return True
-            else:
-                return False
+            return False
 
 
 class UserSerializer(serializers.ModelSerializer):
