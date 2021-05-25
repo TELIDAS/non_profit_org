@@ -24,6 +24,7 @@ urlpatterns = [
     path('', include('publication.urls')),
     path('', include('law.urls')),
     path('', include('consultation.urls')),
+    path('', include('npo_jwt.urls')),
 ]
 from django.conf import settings
 from django.conf.urls.static import static

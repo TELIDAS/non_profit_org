@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'publication',
     'law',
     'consultation',
+    'npo_jwt',
 
 ]
 
