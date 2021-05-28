@@ -7,6 +7,8 @@ from rest_framework.authtoken.models import Token
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
+
+# from news_npo.filters import NewsFilter
 from news_npo.models import News, User, ConfirmationCode, FavoriteNews
 from news_npo.permissions import IsClient
 from news_npo.serializers import NewsSerializer, FavoriteNewsSerializer
@@ -15,6 +17,8 @@ from news_npo.serializers import NewsSerializer, FavoriteNewsSerializer
 class NewsAPIView(APIView, PageNumberPagination):
     allow_methods = ['GET', 'POST']
     serializer_class = NewsSerializer
+    # filterset_class = NewsFilter
+
 
     def get(self, request, *args, **kwargs):
         query = request.query_params.get('query', '')
@@ -41,6 +45,7 @@ class NewsAPIView(APIView, PageNumberPagination):
 class NewsAPIViewDetail(APIView):
     allow_methods = ['GET', 'DELETE', 'PUT']
     serializer_class = NewsSerializer
+
 
     def get(self, request, id):
         news = News.objects.get(id=id)
